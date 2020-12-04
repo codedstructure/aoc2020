@@ -14,4 +14,19 @@ def get_text_pairs(package, splitter):
 
 def get_lines(package):
     with open_text(package, 'inputs.txt') as f:
-        return [l.strip() for l in f.readlines()]
+        return [line.strip() for line in f.readlines()]
+
+
+def get_blank_sep_fields(package):
+    with open_text(package, 'inputs.txt') as f:
+        result = {}
+        for line in f:
+            if not line.strip():
+                yield result
+                result = {}
+                continue
+            for pair in line.split():
+                key, value = pair.split(':', 1)
+                result[key] = value
+        if result:
+            yield result
