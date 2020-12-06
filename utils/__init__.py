@@ -30,3 +30,17 @@ def get_blank_sep_fields(package):
                 result[key] = value
         if result:
             yield result
+
+
+def get_blank_sep_lines(package):
+    with open_text(package, 'inputs.txt') as f:
+        result = []
+        for line in f:
+            line = line.strip()
+            if not line:
+                yield result
+                result = []
+                continue
+            result.append(line)
+        if result:
+            yield result
