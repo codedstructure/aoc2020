@@ -6,10 +6,18 @@ def get_int_inputs(package):
         return list(map(int, f.readlines()))
 
 
-def get_text_pairs(package, splitter):
+def get_int_list(package, sep=','):
+    values = []
+    with open_text(package, 'inputs.txt') as f:
+        for line in f:
+            values.extend(int(x) for x in line.split(sep) if x)
+        return values
+
+
+def get_text_pairs(package, sep):
     with open_text(package, 'inputs.txt') as f:
         return [(x[0].strip(), x[1].strip()) for x in
-                (line.split(splitter) for line in f.readlines())]
+                (line.split(sep) for line in f.readlines())]
 
 
 def get_lines(package):
